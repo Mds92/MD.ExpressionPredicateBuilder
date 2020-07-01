@@ -36,40 +36,29 @@ namespace MD.ExpressionPredicateBuilder.Predicate
 					IncludedNavigationProperties = new List<string>();
 				}
 				else
-				{
-					if (IncludedNavigationProperties == null)
-						IncludedNavigationProperties = new List<string>();
-					foreach (var expression in value)
+                {
+                    IncludedNavigationProperties ??= new List<string>();
+                    foreach (var expression in value)
 					{
 						var selectorString = expression.Body.ToString();
 						IncludedNavigationProperties.Add(selectorString.Remove(0, selectorString.IndexOf('.') + 1));
 					}
-				}
+                }
 			}
 		}
 
 		public void AddIncludedNavigationProperty(Expression<Func<TEntity, object>> expression)
 		{
-			if (expression == null)
-			{
-				return;
-			}
-			if (IncludedNavigationProperties == null)
-				IncludedNavigationProperties = new List<string>();
-
-			var selectorString = expression.Body.ToString();
+			if (expression == null)  return;
+			IncludedNavigationProperties ??= new List<string>();
+            var selectorString = expression.Body.ToString();
 			IncludedNavigationProperties.Add(selectorString.Remove(0, selectorString.IndexOf('.') + 1));
 		}
 
 		public void AddRangeIncludedNavigationProperty(List<Expression<Func<TEntity, object>>> expressions)
 		{
-			if (expressions == null || !expressions.Any())
-			{
-				return;
-			}
-
-			if (IncludedNavigationProperties == null)
-				IncludedNavigationProperties = new List<string>();
+			if (expressions == null || !expressions.Any()) return;
+			IncludedNavigationProperties ??= new List<string>();
 			foreach (var expression in expressions)
 			{
 				var selectorString = expression.Body.ToString();
@@ -79,10 +68,7 @@ namespace MD.ExpressionPredicateBuilder.Predicate
 
 		public void RemoveIncludedNavigationProperty(Expression<Func<TEntity, object>> expression)
 		{
-			if (expression == null)
-			{
-				return;
-			}
+			if (expression == null) return;
 			if (IncludedNavigationProperties != null && IncludedNavigationProperties.Any())
 			{
 				var selectorString = expression.Body.ToString();
