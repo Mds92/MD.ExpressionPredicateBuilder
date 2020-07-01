@@ -343,7 +343,7 @@ namespace MD.ExpressionPredicateBuilder.XUnitTest
             var criteria3 = Criteria<Entity1>.False().Or(criteria1).Or(criteria2);
             var stopwatch = Stopwatch.StartNew();
             var taskList = new List<Task>();
-            for (var i = 0; i < 10_000; i++)
+            for (var i = 0; i < 1_000; i++)
             {
                 taskList.Add(Task.Run(() => {  criteria3.GetExpression(); }));
             }
