@@ -249,16 +249,11 @@ namespace MD.ExpressionPredicateBuilder.Predicate
         private Expression ConvertConditionToExpression(ConditionTree conditionTree, Type parameterExpressionType, ParameterExpression parameterExpression)
         {
             var resultExpression = GetConditionExpression(conditionTree, parameterExpressionType, parameterExpression);
-
-            foreach (var childrenConditionTree in conditionTree.ChildrenConditions)
+			var logicalOperator = conditionTree.NextLogicalOperator;
+            foreach (var childrenConditionTree in conditionTree.ChildrenConditions.ToList())
             {
                 if (_checkedIds.Contains(childrenConditionTree.Id)) continue;
                 _checkedIds.Add(childrenConditionTree.Id);
-
-                var logicalOperator = childrenConditionTree.ChildrenConditions.Any()
-                    ? ConditionContainer.Tree.NextLogicalOperator
-                    : childrenConditionTree.NextLogicalOperator;
-
                 switch (logicalOperator)
                 {
                     case LogicalOperatorEnum.And:
