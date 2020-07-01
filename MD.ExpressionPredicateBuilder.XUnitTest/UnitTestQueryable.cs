@@ -1,5 +1,4 @@
 using System;
-using System.Globalization;
 using System.Linq;
 using Xunit;
 using MD.ExpressionPredicateBuilder.Predicate;
@@ -22,7 +21,7 @@ namespace MD.ExpressionPredicateBuilder.XUnitTest
         #endregion
 
         [Fact]
-        public void TestOnDateTime()
+        public void Test_OnDateTime()
         {
             var criteria = Criteria<CrmServiceLayerHistory>.True()
                 .And(q => q.RequestDateTime, OperatorEnum.GreaterThan, DateTime.Now.Date)
@@ -35,7 +34,7 @@ namespace MD.ExpressionPredicateBuilder.XUnitTest
         }
 
         [Fact]
-        public void TestNestedConditions()
+        public void Test_NestedConditions()
         {
             var criteria1 = Criteria<CrmServiceLayerHistory>.True()
                 .And(q => q.RequestDateTime, OperatorEnum.GreaterThan, DateTime.Now.Date)
