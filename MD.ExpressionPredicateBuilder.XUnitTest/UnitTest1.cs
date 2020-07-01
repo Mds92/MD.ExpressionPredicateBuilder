@@ -33,9 +33,9 @@ namespace MD.ExpressionPredicateBuilder.XUnitTest
                     IsActive = i % 10 != 0,
                     LastName = $"{i}LastName",
                     Name = $"{i}Name",
-                    RegisterDateTime = _dateTimeNow.AddSeconds(i),
-                    RegisterDateTimeNullable = i % 5 == 0 ? (DateTime?)null : _dateTimeNow.AddSeconds(i),
-                    RegisterPersianDateTimeNullable = new PersianDateTime.Standard.PersianDateTime(_dateTimeNow.addmi(i))
+                    RegisterDateTime = _dateTimeNow.AddMinutes(i),
+                    RegisterDateTimeNullable = i % 5 == 0 ? (DateTime?)null : _dateTimeNow.AddMinutes(i),
+                    RegisterPersianDateTimeNullable = new PersianDateTime.Standard.PersianDateTime(_dateTimeNow.AddMinutes(i))
                 });
             }
         }
